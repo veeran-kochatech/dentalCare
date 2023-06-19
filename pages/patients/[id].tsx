@@ -17,51 +17,7 @@ import {
 } from '@heroicons/react/20/solid'
 import { CheckCircleIcon } from '@heroicons/react/24/solid'
 import axios from 'axios'
-import { set } from 'react-hook-form'
 
-
-const invoice = {
-  subTotal: '$8,800.00',
-  tax: '$1,760.00',
-  total: '$10,560.00',
-  items: [
-    {
-      id: 1,
-      code: 'MC-01',
-      treatment: 'Consultation',
-      cost: '20.0',
-      insurance_discount: '$100.00',
-    },
-    {
-        id: 1,
-        code: 'MC-01',
-        treatment: 'Consultation',
-        cost: '20.0',
-        insurance_discount: '$100.00',
-      },
-      {
-        id: 2,
-        code: 'MC-01',
-        treatment: 'Consultation',
-        cost: '20.0',
-        insurance_discount: '$100.00',
-      },
-      {
-        id: 3,
-        code: 'MC-01',
-        treatment: 'Consultation',
-        cost: '20.0',
-        insurance_discount: '$100.00',
-      },
-      {
-        id: 4,
-        code: 'MC-01',
-        treatment: 'Consultation',
-        cost: '20.0',
-        insurance_discount: '$100.00',
-      },
-  ],
-}
 const activity = [
   { id: 1, type: 'consulted', person: { name: 'Chelsea Hagon' }, date: '7d ago', dateTime: '2023-01-23T10:32' },
   { id: 2, type: 'operated', person: { name: 'Chelsea Hagon' }, date: '6d ago', dateTime: '2023-01-23T11:03' },
@@ -95,20 +51,20 @@ function classNames(...classes: string[]) {
 }
 
 
-  export function getServerSideProps(context: { params: any }) {
-    return {
-      props: {params: context.params}
-    };
-  }
+export function getServerSideProps(context: { params: any }) {
+  return {
+    props: {params: context.params}
+  };
+}
 
 export default function Example({params}:any) {
     const [tableLoading, setTableLoading] = useState(true)
-    const [selectedProcedures, setSelectedProcedures] = useState([])
-    const [procedureItems, setProcedureItems] = useState();
-    const [procedures, setProcedures] = useState([])
-    const [employer, setEmployer] = useState()
-    const [insurer, setInsurer] = useState()
-    const [patient, setPatient] = useState()
+    const [selectedProcedures, setSelectedProcedures] = useState<any>([])
+    const [procedureItems, setProcedureItems] = useState<any>();
+    const [procedures, setProcedures] = useState<any>([])
+    const [employer, setEmployer] = useState<any>()
+    const [insurer, setInsurer] = useState<any>()
+    const [patient, setPatient] = useState<any>()
     const [selected, setSelected] = useState(moods[5])
     const [loading, setLoading] = useState(true)
     const {id} = params;
@@ -133,7 +89,8 @@ export default function Example({params}:any) {
     const getProcedureDetails = (data:any) => {
 
       setSelectedProcedures(data)
-      fetchProcedure(patient.id, data.id)
+      const id = patient ? patient?.id : 0
+      fetchProcedure(id, data.id)
     }
     const fetchProcedure = (patient:any, id: any) => {
       setTableLoading(true)
@@ -235,7 +192,7 @@ export default function Example({params}:any) {
                   <dd className="mt-2 text-gray-500">
                   <span className="font-medium text-gray-900">{patient ? patient.patientName:''}</span>
                   <br/>
-                  {patient ? patient.patientAddress.split(',').map((item, key) => <span key={key}>{item}<br/></span>) : ''}
+                  {patient ? patient.patientAddress.split(',').map((item:any, key:any) => <span key={key}>{item}<br/></span>) : ''}
                   </dd>
                 </div>
                 <div className="mt-8 sm:mt-6 sm:border-t sm:border-gray-900/5 sm:pl-4 sm:pt-6">
@@ -243,7 +200,7 @@ export default function Example({params}:any) {
                   <dd className="mt-2 text-gray-500">
                   <span className="font-medium text-gray-900">{employer ? employer.employerName:''}</span>
                   <br/>
-                  {employer ? employer.employerAddress.split(',').map((item, key) => <span key={key}>{item}<br/></span>):''}
+                  {employer ? employer.employerAddress.split(',').map((item:any, key:any) => <span key={key}>{item}<br/></span>):''}
                   </dd>
                 </div>
               </dl>
@@ -270,7 +227,7 @@ export default function Example({params}:any) {
                           leaveTo="opacity-0"
                           >
                           <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                              {procedures.map((person) => (
+                              {procedures.map((person:any) => (
                               <Listbox.Option
                                   key={person.id}
                                   className={({ active }) =>

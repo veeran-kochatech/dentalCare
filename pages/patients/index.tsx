@@ -19,7 +19,7 @@ export default function PatientsList() {
     })
   }, [])
 
-  function redirect(id) {
+  function redirect(id:any) {
     router.push(`/patients/${id}`)
   }
   return (
@@ -76,7 +76,7 @@ export default function PatientsList() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
-                {patients.map((person) => (
+                {patients.map((person:any) => (
                   <tr key={person.email} className="hover:bg-gray-50 cursor-pointer" onClick={()=>redirect(person.id)}>
                     <td className="whitespace-nowrap py-5 px-4 text-sm">
                       <div className="flex items-center">

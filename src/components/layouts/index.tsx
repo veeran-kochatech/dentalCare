@@ -1,8 +1,10 @@
 import { ReactNode, useEffect } from "react"
 import MenuWrapper from "./MenuWrapper"
-import { Props } from '../../types/common.types';
 import { useRouter } from "next/router";
 
+type Props = {
+    children: ReactNode
+  }
 
 
 const Layout =({children}:Props)=>{
