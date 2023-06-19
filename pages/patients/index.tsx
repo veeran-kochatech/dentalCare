@@ -9,7 +9,7 @@ export default function PatientsList() {
   const [patients, setPatients] = useState([])
   const router = useRouter();
   useEffect(() => {
-    axios.get('http://localhost:3000/v1/patients')
+    axios.get('https://dentalcare-backend.vercel.app/v1/patients')
     .then((res) => {
       console.log(res.data)
       setPatients(res.data)

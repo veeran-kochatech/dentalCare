@@ -70,7 +70,7 @@ export default function Example({params}:any) {
     const {id} = params;
 
     useEffect(() => {
-      const baseURL = 'http://localhost:3000/v1/patients/'+id;
+      const baseURL = 'https://dentalcare-backend.vercel.app/v1/patients/'+id;
       axios({
         method: 'get',
         url: baseURL,
@@ -94,7 +94,7 @@ export default function Example({params}:any) {
     }
     const fetchProcedure = (patient:any, id: any) => {
       setTableLoading(true)
-      const baseURL = 'http://localhost:3000/v1/patients/'+patient;
+      const baseURL = 'https://dentalcare-backend.vercel.app/v1/patients/'+patient;
       axios({
         method: 'post',
         url: baseURL,
