@@ -1,0 +1,55 @@
+{
+  "name": "quotebot",
+  "plugins": [
+    {
+      "name": "TailwindCSS",
+      "description": "A utility-first CSS framework packed with classes like flex, pt-4, text-center and rotate-90 that can be composed to build any design, directly in your markup.",
+      "url": "https://tailwindcss.com/docs"
+    },
+    {
+      "name": "CSS / styled-jsx",
+      "description": "Next.js comes with built-in support for CSS and styled-jsx. Styled-jsx is full, scoped and component-friendly CSS support for JSX (rendered on the server or the client).",
+      "url": "https://github.com/vercel/styled-jsx"
+    },
+    {
+      "name": "Axios",
+      "description": "Promise based HTTP client for the browser and node.js.",
+      "url": "https://github.com/axios/axios"
+    },
+    {
+      "name": "SVGR",
+      "description": "Transform SVGs into React components.",
+      "url": "https://react-svgr.com/docs/getting-started/"
+    },
+    {
+      "name": "Environment Variables",
+      "description": "Use environment variables in your next.js project for server side, client or both.",
+      "url": "https://github.com/vercel/next.js/tree/canary/examples/environment-variables"
+    },
+    {
+      "name": "Apollo GraphQL",
+      "description": "Apollo Client is a comprehensive state management library for JavaScript that enables you to manage both local and remote data with GraphQL. Use it to fetch, cache, and modify application data, all while automatically updating your UI.",
+      "url": "https://www.apollographql.com/docs/react/"
+    },
+    {
+      "name": "graphql-request",
+      "description": "Minimal GraphQL client supporting Node and browsers for scripts or simple apps",
+      "url": "https://github.com/prisma-labs/graphql-request"
+    },
+    {
+      "name": "react-use",
+      "description": "A Collection of useful React hooks.",
+      "url": "https://github.com/streamich/react-use"
+    },
+    {
+      "name": "Jest",
+      "description": "Jest is a delightful JavaScript Testing Framework with a focus on simplicity.",
+      "url": "https://jestjs.io/docs/en/getting-started"
+    },
+    {
+      "name": "Docker",
+      "description": "Docker simplifies and accelerates your workflow, while giving developers the freedom to innovate with their choice of tools, application stacks, and deployment environments for each project.",
+      "url": "https://www.docker.com/get-started"
+    }
+  ]
+}

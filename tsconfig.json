@@ -1,0 +1,81 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@context/*": [
+        "src/context/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@components": [
+        "src/components"
+      ],
+      "@public/*": [
+        "public/*"
+      ],
+      "@public": [
+        "public"
+      ],
+      "@styles/*": [
+        "src/styles/*"
+      ],
+      "@styles": [
+        "src/styles"
+      ],
+      "@types": [
+        "src/types/*"
+      ],
+      "@types/*": [
+        "src/types/*"
+      ],
+      "@components/icons/*": [
+        "src/components/icons/*"
+      ],
+      "@components/icons": [
+        "src/components/icons"
+      ],
+      "@services/*": [
+        "src/services/*"
+      ],
+      "@services": [
+        "src/services"
+      ],
+      "@graphqlTypes/*": [
+        "__generated__/*"
+      ],
+      "@graphqlTypes": [
+        "__generated__"
+      ]
+    },
+    "incremental": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx", "src/components/elements/pdfViewer.js", 
+    // "pages/uploads/index.tsx", 
+    // "src/components/elements/pdf-worker.js"  
+  ],
+  "exclude": [
+    "node_modules",
+    "__generated__/globalTypes.ts"
+  ]
+}
