@@ -12,7 +12,7 @@ export default function Example() {
   const [selectedInsurance, setSelectedInsurance] = useState("")
   const router = useRouter();
   useEffect(()=>{
-    axios.get('http://localhost:3000/v1/patients/employee')
+    axios.get('https://dentalcare-backend.vercel.app/v1/patients/employee')
     .then((res) => {
       console.log(res.data)
       setEmployees(res.data['employees'])
@@ -51,7 +51,7 @@ export default function Example() {
     }
     console.log(data)
 
-    axios.post('http://localhost:3000/v1/patients', data)
+    axios.post('https://dentalcare-backend.vercel.app/v1/patients', data)
     .then((res) => {
       console.log(res.data)
       alert("Patient created successfully")
