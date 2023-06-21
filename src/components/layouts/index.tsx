@@ -11,23 +11,17 @@ const Layout =({children}:Props)=>{
     const router = useRouter()
 
     useEffect(()=>{
-
-        let auth_token, refresh_token;
-        if( auth_token === '' || auth_token === undefined ){
-            router.push("/auth/login");
-        }
-    },[])
-
-    useEffect(()=>{
+        console.log("auth_token")
         if (typeof window !== 'undefined') {
             let auth_token = localStorage.getItem('authToken')
+            console.log("auth_token ",auth_token)
             if( auth_token === '' || auth_token === undefined ){
                 router.push("/auth/login");
             }
         }
     },[])
 
-    if(router.pathname === '/auth/login' || router.pathname === '/auth/redirect'){
+    if(router.pathname === '/auth/login'){
         return <div>{children}</div>
     }
     

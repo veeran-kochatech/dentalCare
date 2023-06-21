@@ -11,13 +11,14 @@ const HospitalUser = () => {
     return <FaHospitalUser/>
 }
 export default function WithSidebar(props: { children: ReactNode }) {
+    const router = useRouter()
 
     const logout =()=>{
         if (typeof window !== 'undefined') {
             localStorage.setItem('authToken','')
             localStorage.setItem('refreshToken','')
          }
-
+         router.push("/auth/login");
     }
 
     let hostname='';
@@ -54,7 +55,7 @@ export default function WithSidebar(props: { children: ReactNode }) {
                         return(
                             <a href={page.path} key={page.label}>
                                 <div className={getTitle() == page.label ? 
-                                        " w-56 h-16 flex flex-row items-center  not-italic font-medium text-base leading-3 font-['Roboto'] bg-color2 text-gray-800 rounded-r-3xl" 
+                                        " w-56 h-16 flex flex-row items-center  not-italic font-medium text-base leading-3 font-['Roboto'] bg-blue-50 text-gray-800 rounded-r-3xl" 
                                         : "w-56 h-16 flex flex-row items-center  not-italic font-medium text-base leading-3 text-gray-500 font-['Roboto'] hover:bg-color2 hover:text-gray-600 hover: rounded-r-3xl"}>
                                     <div className="ml-8 mr-4">
                                         {page.icon}

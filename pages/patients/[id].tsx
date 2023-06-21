@@ -70,20 +70,25 @@ export default function Example({params}:any) {
     const {id} = params;
 
     useEffect(() => {
-      const baseURL = 'https://dentalcare-backend.vercel.app/v1/patients/'+id;
+      setLoading(true)
+      const baseURL = 'http://localhost:3000/v1/patients/'+id;
       axios({
         method: 'get',
         url: baseURL,
       }).then(async(response) => {
+        console.log(response.data['insurer'])
         setPatient(response.data['patient'])
         setEmployer(response.data['employee'])
         setInsurer(response.data['insurer'])
         setProcedures(response.data['procedures'])
         setSelectedProcedures(response.data['procedures'][0])
         await fetchProcedure(response.data['patient'].id, response.data['procedures'][0].id)
-      });
+      })
+      .finally(() => {
+        setLoading(false)
+      });  
       
-      setLoading(false)
+      
     }, [])
 
     const getProcedureDetails = (data:any) => {
@@ -94,7 +99,7 @@ export default function Example({params}:any) {
     }
     const fetchProcedure = (patient:any, id: any) => {
       setTableLoading(true)
-      const baseURL = 'https://dentalcare-backend.vercel.app/v1/patients/'+patient;
+      const baseURL = 'http://localhost:3000/v1/patients/'+patient;
       axios({
         method: 'post',
         url: baseURL,
@@ -111,14 +116,15 @@ export default function Example({params}:any) {
 
   return (
     <>
+      {console.log(loading)}
       {loading && 
-      <>
+      <div>
         <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden bg-gray-700 opacity-75 flex flex-col items-center justify-center">
         <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
           <h2 className="text-center text-white text-xl font-semibold">Loading...</h2>
           {/* <p className="w-1/3 text-center text-white">This may take a few seconds, please don't close this page.</p> */}
         </div>
-      </>
+      </div>
       }
       {loading == false &&
       <main>
@@ -136,7 +142,7 @@ export default function Example({params}:any) {
                   <div className="flex-none self-end px-6 pt-4">
                     <dt className="sr-only">Status</dt>
                     <dd className="rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-600 ring-1 ring-inset ring-green-600/20">
-                      Paid
+                      Pending
                     </dd>
                   </div>
                   <div className="mt-6 flex w-full flex-none gap-x-4 border-t border-gray-900/5 px-6 pt-6">
@@ -176,31 +182,41 @@ export default function Example({params}:any) {
               <h2 className="text-base font-semibold leading-6 text-gray-900">Patient Details</h2>
               <dl className="mt-6 grid grid-cols-1 text-sm leading-6 sm:grid-cols-2">
                 <div className="sm:pr-4">
-                  <dt className="inline text-gray-500">Joined on</dt>{' '}
+                  <dt className="font-semibold text-gray-900">Patient Address</dt>
                   <dd className="inline text-gray-700">
-                    <time dateTime="2023-23-01">January 23, 2023</time>
-                  </dd>
-                </div>
-                <div className="mt-2 sm:mt-0 sm:pl-4">
-                  <dt className="inline text-gray-500">{''}</dt>{' '}
-                  <dd className="inline text-gray-700">
-                    <time dateTime="2023-31-01">{''}</time>
-                  </dd>
-                </div>
-                <div className="mt-6 border-t border-gray-900/5 pt-6 sm:pr-4">
-                  <dt className="font-semibold text-gray-900">Address</dt>
-                  <dd className="mt-2 text-gray-500">
                   <span className="font-medium text-gray-900">{patient ? patient.patientName:''}</span>
                   <br/>
                   {patient ? patient.patientAddress.split(',').map((item:any, key:any) => <span key={key}>{item}<br/></span>) : ''}
                   </dd>
                 </div>
-                <div className="mt-8 sm:mt-6 sm:border-t sm:border-gray-900/5 sm:pl-4 sm:pt-6">
+                <div className="mt-2 sm:mt-0 sm:pl-4">
+                  <dt className="font-semibold text-gray-900">{'Contact'}</dt>
+                  <dd className="inline text-gray-700">
+                  <span>Patient ID: </span>{patient ? patient.id.substring(0, 6):''}
+                  <br/>
+                  <span>Email: </span>{patient ? patient.email:''}
+                  <br/>
+                  <span>Contact: </span>{patient ? patient.patientContactNo:''}
+                  </dd>
+                </div>
+                <div className="mt-6 border-t border-gray-900/5 pt-6 sm:pr-4">
                   <dt className="font-semibold text-gray-900">Employer</dt>
                   <dd className="mt-2 text-gray-500">
                   <span className="font-medium text-gray-900">{employer ? employer.employerName:''}</span>
                   <br/>
                   {employer ? employer.employerAddress.split(',').map((item:any, key:any) => <span key={key}>{item}<br/></span>):''}
+                  <br/>
+                  {employer ? employer.employerContactNo:''}
+                  </dd>
+                </div>
+                <div className="mt-8 sm:mt-6 sm:border-t sm:border-gray-900/5 sm:pl-4 sm:pt-6">
+                  <dt className="font-semibold text-gray-900">Insurer</dt>
+                  <dd className="mt-2 text-gray-500">
+                  <span className="font-medium text-gray-900">{insurer ? insurer.insurerName:''}</span>
+                  <br/>
+                  {insurer ? insurer.insurerAddress.split(',').map((item:any, key:any) => <span key={key}>{item}<br/></span>):''}
+                  <br/>
+                  <span>{insurer ? insurer.insurerContactNo:''}</span>
                   </dd>
                 </div>
               </dl>

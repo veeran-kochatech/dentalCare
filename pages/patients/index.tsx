@@ -7,8 +7,11 @@ import {useRouter} from "next/router";
 export default function PatientsList() {
 
   const [patients, setPatients] = useState([])
+  const [loading, setLoading] = useState(false)
+
   const router = useRouter();
   useEffect(() => {
+    setLoading(true)
     axios.get('https://dentalcare-backend.vercel.app/v1/patients')
     .then((res) => {
       console.log(res.data)
@@ -17,12 +20,25 @@ export default function PatientsList() {
     .catch((err) => {
       console.log(err)
     })
+    .finally(() => {
+      setLoading(false)
+    })
   }, [])
 
   function redirect(id:any) {
     router.push(`/patients/${id}`)
   }
   return (
+    <>
+    {loading && 
+      <>
+        <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden bg-gray-700 opacity-75 flex flex-col items-center justify-center">
+        <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
+          <h2 className="text-center text-white text-xl font-semibold">Loading...</h2>
+          {/* <p className="w-1/3 text-center text-white">This may take a few seconds, please don't close this page.</p> */}
+        </div>
+      </>
+      }
     <div className="">  
       <div className="flex">
         <div className="sm:flex-auto">
@@ -50,6 +66,7 @@ export default function PatientsList() {
           <button
             type="button"
             className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            onClick={() => router.push('/patients/new')}
           >
             Add Patient
           </button>
@@ -60,14 +77,14 @@ export default function PatientsList() {
           <div className="min-w-full shadow rounded-lg">
             <table className="min-w-full bg-white">
               <thead>
-                <tr className="bg-gray-50">
-                  <th scope="col" className="py-[24px] px-[24px] text-left text-sm font-semibold text-gray-900">
+                <tr className="bg-blue-50 border-b-2 border-blue-100">
+                  <th scope="col" className="py-[24px] px-[24px] text-left text-xs font-semibold text-gray-700 uppercase">
                     Name
                   </th>
-                  <th scope="col" className="py-[24px] px-[16px] text-left text-sm font-semibold text-gray-900">
+                  <th scope="col" className="py-[24px] px-[16px] text-left text-xs font-semibold text-gray-700 uppercase">
                     Address
                   </th>
-                  <th scope="col" className="py-[24px] px-[16px] text-left text-sm font-semibold text-gray-900">
+                  <th scope="col" className="py-[24px] px-[16px] text-left text-xs font-semibold text-gray-700 uppercase">
                     Status
                   </th>
                   <th scope="col" className="relative py-[24px] px-4">
@@ -110,5 +127,6 @@ export default function PatientsList() {
         </div>
       </div>
     </div>
+    </>
   )
 }
